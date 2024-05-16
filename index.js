@@ -26,7 +26,7 @@ io.on('connection', socket => {
     // Hint: If your stuck use slide 24 for reference
 
     socket.on('message', (msg) => {
-        socket.broadcast.emit('message', msg)
+        io.emit('message', `${socket.id.substring(0, 5)}: ${msg}`)
     })
 //----------------------------
 
@@ -39,6 +39,7 @@ io.on('connection', socket => {
     // Listen for activity event
     socket.on('typing', (name) => {
         // Hint: Pay attention to the parameter
+        socket.broadcast.emit('typing', name)
     })
 //----------------------------
 })
